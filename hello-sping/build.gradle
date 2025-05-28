@@ -23,6 +23,9 @@ dependencies {
 	//톰캣(웹서버), 스프링 웹 MVC 의존성
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 
+	//html 파일을 컴파일하면 서버 재시작 없이 View 파일 변경
+	developmentOnly("org.springframework.boot:spring-boot-devtools")
+
 	//테스트 라이브러리
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
