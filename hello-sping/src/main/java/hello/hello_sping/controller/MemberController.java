@@ -4,6 +4,7 @@ import hello.hello_sping.domain.Member;
 import hello.hello_sping.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -29,5 +30,12 @@ public class MemberController {
         memberService.join(member);
 
         return "redirect:/";
+    }
+
+    @GetMapping("/members")
+    public String list(Model model){
+        model.addAttribute("members", memberService.findMembers());
+
+        return "members/memberList";
     }
 }
