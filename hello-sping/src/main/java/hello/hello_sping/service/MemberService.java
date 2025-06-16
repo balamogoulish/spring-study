@@ -1,15 +1,19 @@
 package hello.hello_sping.service;
 
 import hello.hello_sping.domain.Member;
-import hello.hello_sping.repository.MemoryMemberRepository;
+import hello.hello_sping.repository.MemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class MemberService {
-    private final MemoryMemberRepository memberRepository;
+    private final MemberRepository memberRepository;
 
-    public MemberService(MemoryMemberRepository memberRepository) {
+    @Autowired
+    public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
 
