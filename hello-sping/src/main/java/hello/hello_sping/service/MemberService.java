@@ -1,15 +1,18 @@
 package hello.hello_sping.service;
 
 import hello.hello_sping.domain.Member;
-import hello.hello_sping.repository.MemberRepository;
 import hello.hello_sping.repository.MemoryMemberRepository;
 
 import java.util.List;
 import java.util.Optional;
 
 public class MemberService {
-    private final MemberRepository memberRepository = new MemoryMemberRepository();
-    
+    private final MemoryMemberRepository memberRepository;
+
+    public MemberService(MemoryMemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
+    }
+
     //회원가입 => 같은 이름이 있는 중복 회원은 X
     public Long join(Member member){
         validateDuplicateMember(member); //중복 회원 검증
