@@ -1,7 +1,16 @@
 package hello.hello_sping.domain;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class Member {
+
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    //@Column(name = "username") => db에 username으로 등록되어 있는 경우
     private String name;
 
     public Long getId() {
