@@ -2,9 +2,6 @@ package hello.hello_sping.service;
 
 import hello.hello_sping.domain.Member;
 import hello.hello_sping.repository.MemberRepository;
-import hello.hello_sping.repository.MemoryMemberRepository;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -30,7 +27,7 @@ class MemberServiceIntegrationTest {
     void join() {
         //given: 주어진 조건
         Member member = new Member();
-        member.setName("member2Test");
+        member.setName("member1Test");
 
         //when: 실행
         Long saveId = memberService.join(member);
@@ -44,9 +41,9 @@ class MemberServiceIntegrationTest {
     void join_duplicated() {
         //given: 주어진 조건
         Member member1 = new Member();
-        member1.setName("memberTest_duplicated");
+        member1.setName("memberTest_duplicated2");
         Member member2 = new Member();
-        member2.setName("memberTest_duplicated");
+        member2.setName("memberTest_duplicated2");
 
         //when: 실행
         Long member1Id = memberService.join(member1);
@@ -72,7 +69,7 @@ class MemberServiceIntegrationTest {
         List<Member> result = memberService.findMembers();
 
         //then
-        assertThat(5).isEqualTo(result.size());
+        assertThat(7).isEqualTo(result.size());
     }
 
     @Test
