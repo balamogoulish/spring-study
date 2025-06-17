@@ -1,6 +1,6 @@
-package hello.hello_sping.repository;
+package hello.hello_spring.repository;
 
-import hello.hello_sping.domain.Member;
+import hello.hello_spring.domain.Member;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 import javax.sql.DataSource; import java.sql.*;
 import java.util.ArrayList; import java.util.List;

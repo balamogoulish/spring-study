@@ -1,7 +1,7 @@
-package hello.hello_sping.controller;
+package hello.hello_spring.controller;
 
-import hello.hello_sping.domain.Member;
-import hello.hello_sping.service.MemberService;
+import hello.hello_spring.domain.Member;
+import hello.hello_spring.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

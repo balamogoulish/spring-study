@@ -1,13 +1,13 @@
-package hello.hello_sping;
+package hello.hello_spring;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class HelloSpingApplication {
+public class HelloSpringApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(HelloSpingApplication.class, args);
+		SpringApplication.run(HelloSpringApplication.class, args);
 	}
 
 }

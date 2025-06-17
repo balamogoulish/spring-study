@@ -1,7 +1,7 @@
-package hello.hello_sping.service;
+package hello.hello_spring.service;
 
-import hello.hello_sping.domain.Member;
-import hello.hello_sping.repository.MemberRepository;
+import hello.hello_spring.domain.Member;
+import hello.hello_spring.repository.MemberRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
