@@ -41,9 +41,9 @@ class MemberServiceIntegrationTest {
     void join_duplicated() {
         //given: 주어진 조건
         Member member1 = new Member();
-        member1.setName("memberTest_duplicated2");
+        member1.setName("memberTest_duplicated");
         Member member2 = new Member();
-        member2.setName("memberTest_duplicated2");
+        member2.setName("memberTest_duplicated");
 
         //when: 실행
         Long member1Id = memberService.join(member1);
@@ -64,19 +64,30 @@ class MemberServiceIntegrationTest {
     @Test
     void findMembers() {
         //given
+        Member member1 = new Member();
+        member1.setName("memberTest_duplicated");
+        Member member2 = new Member();
+        member2.setName("memberTest_duplicated");
 
+        memberRepository.save(member1);
+        memberRepository.save(member2);
         //when
         List<Member> result = memberService.findMembers();
 
         //then
-        assertThat(7).isEqualTo(result.size());
+        assertThat(2).isEqualTo(result.size());
     }
 
     @Test
     void findOne() {
         //given
-        Long saveId1 = 1L;
-        Long saveId2 = 2L;
+        Member member1 = new Member();
+        member1.setName("member1FindTest");
+        Member member2 = new Member();
+        member2.setName("member2FindTest");
+
+        Long saveId1 = memberService.join(member1);
+        Long saveId2 = memberService.join(member2);
 
         //when
         Optional<Member> result1 = memberService.findOne(saveId1);
@@ -92,7 +103,6 @@ class MemberServiceIntegrationTest {
             fail("member2을 찾을 수 없습니다.");
         }
         result2.ifPresent(m->{assertThat(saveId2).isEqualTo(m.getId());});
-
         result3.ifPresent(m->fail("등록하지 않은 member3가 존재합니다."));
 
     }
