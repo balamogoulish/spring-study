@@ -1,8 +1,7 @@
-package hello.hello_sping;
+package hello.hello_spring;
 
-import hello.hello_sping.repository.*;
-import hello.hello_sping.service.MemberService;
-import jakarta.persistence.EntityManager;
+import hello.hello_spring.repository.*;
+import hello.hello_spring.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

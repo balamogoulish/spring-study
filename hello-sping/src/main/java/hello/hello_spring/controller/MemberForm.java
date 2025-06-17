@@ -1,4 +1,4 @@
-package hello.hello_sping.controller;
+package hello.hello_spring.controller;
 
 public class MemberForm {
     private String name;
