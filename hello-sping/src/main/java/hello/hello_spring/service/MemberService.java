@@ -1,14 +1,14 @@
-package hello.hello_sping.service;
+package hello.hello_spring.service;
 
-import hello.hello_sping.domain.Member;
-import hello.hello_sping.repository.MemberRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import hello.hello_spring.domain.Member;
+import hello.hello_spring.repository.MemberRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
 //@Service
+@Transactional
 public class MemberService {
     private final MemberRepository memberRepository;
 
@@ -20,7 +20,6 @@ public class MemberService {
     //회원가입 => 같은 이름이 있는 중복 회원은 X
     public Long join(Member member){
         validateDuplicateMember(member); //중복 회원 검증
-
         memberRepository.save(member);
         return member.getId();
     }
@@ -41,6 +40,4 @@ public class MemberService {
                     throw new IllegalStateException("이미 존재하는 회원입니다.");
                 });
     }
-
-    
 }

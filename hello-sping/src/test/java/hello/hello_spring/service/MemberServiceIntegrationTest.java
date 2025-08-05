@@ -1,54 +1,49 @@
-package hello.hello_sping.service;
+package hello.hello_spring.service;
 
-import hello.hello_sping.domain.Member;
-
-import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
-import hello.hello_sping.repository.MemoryMemberRepository;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import hello.hello_spring.domain.Member;
+import hello.hello_spring.repository.MemberRepository;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
-class MemberServiceTest {
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+@SpringBootTest
+@Transactional
+class MemberServiceIntegrationTest {
+
+    @Autowired
     MemberService memberService;
-    MemoryMemberRepository memberRepository;
-
-    @BeforeEach
-    public void beforeEach() {
-        memberRepository = new MemoryMemberRepository();
-        memberService = new MemberService(memberRepository);
-    }
-
-    @AfterEach
-    public void afterEach(){
-        memberRepository.clearStore();
-    }
+    @Autowired
+    MemberRepository memberRepository;
 
     @Test
     void join() {
         //given: 주어진 조건
         Member member = new Member();
-        member.setName("member1");
+        member.setName("member1Test");
 
         //when: 실행
         Long saveId = memberService.join(member);
 
         //then: 그러면
         Member result = memberRepository.findById(saveId).get();
-        assertThat(member).isEqualTo(result);
+        assertThat(saveId).isEqualTo(result.getId());
     }
 
     @Test
     void join_duplicated() {
         //given: 주어진 조건
         Member member1 = new Member();
-        member1.setName("member1");
+        member1.setName("memberTest_duplicated");
         Member member2 = new Member();
-        member2.setName("member1");
+        member2.setName("memberTest_duplicated");
 
         //when: 실행
         Long member1Id = memberService.join(member1);
@@ -70,13 +65,12 @@ class MemberServiceTest {
     void findMembers() {
         //given
         Member member1 = new Member();
-        member1.setName("member1");
+        member1.setName("memberTest_duplicated");
         Member member2 = new Member();
-        member2.setName("member2");
+        member2.setName("memberTest_duplicated");
 
         memberRepository.save(member1);
         memberRepository.save(member2);
-
         //when
         List<Member> result = memberService.findMembers();
 
@@ -88,9 +82,9 @@ class MemberServiceTest {
     void findOne() {
         //given
         Member member1 = new Member();
-        member1.setName("member1");
+        member1.setName("member1FindTest");
         Member member2 = new Member();
-        member2.setName("member2");
+        member2.setName("member2FindTest");
 
         Long saveId1 = memberService.join(member1);
         Long saveId2 = memberService.join(member2);
@@ -98,7 +92,7 @@ class MemberServiceTest {
         //when
         Optional<Member> result1 = memberService.findOne(saveId1);
         Optional<Member> result2 = memberService.findOne(saveId2);
-        Optional<Member> result3 = memberService.findOne(3L);
+        Optional<Member> result3 = memberService.findOne(10L);
 
         if(result1.isEmpty()){
             fail("member1을 찾을 수 없습니다.");
@@ -109,7 +103,6 @@ class MemberServiceTest {
             fail("member2을 찾을 수 없습니다.");
         }
         result2.ifPresent(m->{assertThat(saveId2).isEqualTo(m.getId());});
-
         result3.ifPresent(m->fail("등록하지 않은 member3가 존재합니다."));
 
     }
