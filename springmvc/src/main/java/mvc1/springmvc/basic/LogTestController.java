@@ -1,11 +1,11 @@
 package mvc1.springmvc.basic;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-//@S1f4j
 
 /**
  * application.properties에서 로깅 레벨 설정
@@ -13,10 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
  * - 개발 서버는 debug 출력
  * - 운영 서버는 info 출력
  */
+@Slf4j
 @RestController
 public class LogTestController {
-
-    private final Logger log = LoggerFactory.getLogger(getClass());
+    //@Slf4j로 대체 가능
+//    private final Logger log = LoggerFactory.getLogger(getClass());
 
     @RequestMapping("/log-test")
     public String logTest(){
