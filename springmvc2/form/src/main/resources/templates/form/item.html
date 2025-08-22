@@ -38,7 +38,6 @@
         <input type="text" id="quantity" name="quantity" class="form-control" value="10" th:value="${item.quantity}" readonly>
     </div>
 
-    <hr class="my-4">
     <!-- 단일 체크박스 -->
     <div>판매 여부</div>
     <div>
@@ -66,6 +65,19 @@
             </label>
         </div>
     </div>
+    <!-- 셀렉트 박스 -->
+    <div>
+        <div>배송 방식</div>
+        <select th:field="${item.deliveryCode}" class="form-select" disabled>
+            <option value="">==배송 방식 선택==</option>
+            <option th:each="deliveryCode : ${deliveryCodes}"
+                    th:value="${deliveryCode.code}"
+                    th:text="${deliveryCode.displayName}">FAST</option>
+        </select>
+    </div>
+
+    <hr class="my-4">
+
     <div class="row">
         <div class="col">
             <button class="w-100 btn btn-primary btn-lg"
