@@ -10,7 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Controller
@@ -18,6 +20,19 @@ import java.util.List;
 @RequiredArgsConstructor
 public class FormItemController {
     private final ItemRepository itemRepository;
+
+    /*
+    모델에 항상 담겨져서 전달이 된다.
+    모든 메서드에 regions attribute가 포함됨
+     */
+    @ModelAttribute("regions")
+    public Map<String, String> regions(){
+        Map<String, String> regions = new LinkedHashMap<>(); // HashMap은 순서 보장이 안됨
+        regions.put("SEOUL", "서울");
+        regions.put("BUSAN", "부산");
+        regions.put("JEJU", "제주");
+        return regions;
+    }
 
     @GetMapping
     public String items(Model model){
@@ -66,8 +81,7 @@ public class FormItemController {
     */
     @PostMapping("add")
     public String addItemV5(Item item, RedirectAttributes redirectAttributes){
-        log.info("item.open={}", item.getOpen());
-
+        log.info("item.regions={}", item.getRegions());
         Item saveItem = itemRepository.save(item);
         redirectAttributes.addAttribute("itemId", saveItem.getId());
         redirectAttributes.addAttribute("status", true); //status가 true이면 저장 완료 띄우기
