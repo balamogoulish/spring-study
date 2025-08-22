@@ -2,6 +2,7 @@ package mvc2.itemservice.web.form;
 
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import mvc2.itemservice.domain.item.Item;
 import mvc2.itemservice.domain.item.ItemRepository;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
+@Slf4j
 @Controller
 @RequestMapping("/form/items")
 @RequiredArgsConstructor
@@ -64,6 +66,8 @@ public class FormItemController {
     */
     @PostMapping("add")
     public String addItemV5(Item item, RedirectAttributes redirectAttributes){
+        log.info("item.open={}", item.getOpen());
+
         Item saveItem = itemRepository.save(item);
         redirectAttributes.addAttribute("itemId", saveItem.getId());
         redirectAttributes.addAttribute("status", true); //status가 true이면 저장 완료 띄우기
